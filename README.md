@@ -1,5 +1,5 @@
 # rsa_demo
-Demo that shows how to implement RSA encryption, decryption and key generation.
+Demo that shows how to understand RSA encryption, decryption and key generation.
 
 [![Releases](https://img.shields.io/github/release/jlinoff/rsa_demo.svg?style=flat)](https://github.com/jlinoff/rsa_demo/releases)
 
