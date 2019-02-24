@@ -31,7 +31,11 @@ before the encrypted code. You can see the structure in the
 Here is a simple example of how to use it:
 
 ```bash
-   $ # Install the system.
+   $ # Download
+   $ git clone https://github.com/jlinoff/rsa_demo.git
+   $ cd rsa_demo
+
+   $ # Install the system in a local pipenv.
    $ make
 
    $ # Create a dummy data file.
