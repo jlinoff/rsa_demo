@@ -14,7 +14,7 @@ files.
 ### Important Disclaimer
 The goal is purely pedagogical. Do not try to use it for any
 production work. It is too slow and it is not secure (see the
-discussion of key generation below). For production work always use
+discussion of vulnerabilities below). For production work always use
 tools like `openssl` and `openssh`.
 
 ### Key Generation
