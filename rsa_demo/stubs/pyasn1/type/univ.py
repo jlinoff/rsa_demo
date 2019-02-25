@@ -1,0 +1,9 @@
+# Really hackey stubs, not suitable for typeshed.
+from typing import Any
+
+class Integer():
+    def __init__(self, value: Any = None) -> None: ...
+    
+class Sequence():
+    def __init__(self) -> None: ...
+    def setComponentByPosition(self, idx: int, value: Any) -> None: ...
