@@ -13,7 +13,8 @@ files. It also provides tools to read and dump the public and private
 key files.
 
 One interesting feature is that it will encrypt and decrypt text of
-sizes greater than a single block.
+sizes greater than a single block. Another is that it uses the same
+key structure as production versions.
 
 The code is written in python3 (compatible with 3.7 or later). It exists
 in a local module named `rsa_demo` that is bundled as a wheel that is
