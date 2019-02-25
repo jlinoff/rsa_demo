@@ -134,7 +134,7 @@ Here is a simple example of how to use it:
      2	    4:d=1  hl=4 l= 512 prim: INTEGER           :6A24F79C34A35D5EC513E8930
      3	  520:d=1  hl=2 l=   3 prim: INTEGER           :010001
    
-   $ # Dump the public SSH file using one of the key reader provided.
+   $ # Dump the public SSH file using the key reader provided.
    $ pipenv run read_rsa_ssh_public dummykeys.pub | tr '\t' ' ' | cat -n | cut -c -80
      1	dummykeys.pub
      2	   algorithm = ssh-rsa
