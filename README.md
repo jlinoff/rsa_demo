@@ -19,6 +19,13 @@ The code is written in python3 (compatible with 3.7 or later). It exists
 in a local module named `rsa_demo` that is bundled as a wheel that is
 released in a local `pipenv` environment.
 
+The theory behind RSA including descriptions of Fermats Little Theorem,
+the Extendend Euclidean Algorithm, Bezout's Identity, modulus arithmetic,
+factoring complexity and the host of other concepts and history related
+to the RSA algorithm are not discussed here because there are so many
+great resources on the web. My hope is that you will find and read
+the references and then compare them to the implementations here.
+
 ### Important Disclaimer
 The goal is purely pedagogical. Do not try to use it for any
 production work. It is too slow and it is not secure (see the
