@@ -162,7 +162,7 @@ def main():
     ofp.write(f'Goal: {fake.bs()}\n')
     smin = opts.num_paragraph_sentences[0]
     smax = opts.num_paragraph_sentences[1]
-    for i in range(num):
+    for _ in range(num):
         ofp.write('\n')
         num_sentences = random.randint(smin, smax)
         text = fake.paragraph(nb_sentences=num_sentences)

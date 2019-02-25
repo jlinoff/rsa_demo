@@ -109,6 +109,7 @@ import random
 import socket
 import sys
 import textwrap
+from typing import Tuple
 
 from pyasn1.type import univ
 from pyasn1.codec.der import encoder as der_encoder
@@ -175,7 +176,7 @@ class RSAFactors:
         assert b == 1
 
 
-def xgcd(a, b):
+def xgcd(a: int, b: int) -> Tuple[int, int, int]:
     """
     return (g, x, y) such that a*x + b*y = g = gcd(a, b)
     Citation: https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Extended_Euclidean_algorithm#Python
@@ -252,7 +253,7 @@ def getopts() -> argparse.Namespace:
     '''
     Get the command line options.
     '''
-    def gettext(string):
+    def gettext(string: str) -> str:
         '''
         Convert to upper case to make things consistent.
         '''
@@ -425,7 +426,7 @@ Default: %(default)s.
     return opts
 
 
-def write_rsa_pkcs1_private(opts: argparse.Namespace, rsa: RSAFactors):
+def write_rsa_pkcs1_private(opts: argparse.Namespace, rsa: RSAFactors) -> None:
     '''
     Write the PKCS#1 private key.
     Citation: https://tls.mbed.org/kb/cryptography/asn1-key-structures-in-der-and-pem
@@ -456,7 +457,7 @@ def write_rsa_pkcs1_private(opts: argparse.Namespace, rsa: RSAFactors):
 ''')
 
 
-def write_rsa_pkcs1_pem_public(opts: argparse.Namespace, rsa: RSAFactors):
+def write_rsa_pkcs1_pem_public(opts: argparse.Namespace, rsa: RSAFactors) -> None:
     '''
     Write PEM RSA public key: PKCS#1.
     Citation: http://blog.oddbit.com/2011/05/08/converting-openssh-public-keys/
@@ -478,7 +479,7 @@ def write_rsa_pkcs1_pem_public(opts: argparse.Namespace, rsa: RSAFactors):
 ''')
 
 
-def write_rsa_ssh_public(opts: argparse.Namespace, rsa: RSAFactors):
+def write_rsa_ssh_public(opts: argparse.Namespace, rsa: RSAFactors) -> None:
     '''
     Write SSH format: https://tools.ietf.org/html/rfc4716.
     Citation: http://blog.oddbit.com/2011/05/08/converting-openssh-public-keys/
@@ -524,7 +525,7 @@ ssh-rsa {data_str} {getpass.getuser()}@{socket.gethostname()}
 ''')
 
 
-def write_keys(opts: argparse.Namespace, rsa: RSAFactors):
+def write_keys(opts: argparse.Namespace, rsa: RSAFactors) -> None:
     '''
     Write out the key data.
     '''
@@ -551,7 +552,7 @@ RSA Parameters
         write_rsa_ssh_public(opts, rsa)
 
 
-def get_int_arg(arg):
+def get_int_arg(arg) -> int:
     '''
     Allow hex and decimal integer specifications.
 
@@ -567,13 +568,13 @@ def get_int_arg(arg):
         }
     for key, val in base_prefixes.items():
         if arg.startswith(key):
-            base=val
+            base = val
             break
     value = int(arg, base)
     return value
 
 
-def main():
+def main() -> None:
     '''
     Main entry point.
     '''

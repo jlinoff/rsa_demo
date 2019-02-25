@@ -4,7 +4,7 @@ TERM_ANSI_RESET := "\\033[0m"
 PHASE           := printf "${TERM_ANSI_BOLD}=-=-= %s: %s =-=-=${TERM_ANSI_RESET}\n" "`date`"
 SUCCESS         := printf "${TERM_ANSI_GREEN}=-=-= %s: %s =-=-=${TERM_ANSI_RESET}\n" "`date`"
 
-.PHONY: default clean pipfile test test/test01 test/test02 wheel
+.PHONY: default clean pipfile sa test test/test01 test/test02 wheel
 
 default: test
 
@@ -85,6 +85,12 @@ test/test02:
 	diff $@.txt $@.txt.enc.dec
 	@$(SUCCESS) "$@ - all tests passed"
 
+sa:
+	@$(PHASE) "$@ - static analysis"
+	-pipenv run mypy rsa_demo
+	@$(PHASE) "$@ - pylint"
+	-pylint rsa_demo
+
 # Force the wheel to be built.
 wheel:
 	-rm -f .wheel
@@ -97,7 +103,7 @@ wheel:
 	-rm -rf build rsa_demo-* dist
 	pipenv run python setup.py sdist bdist_wheel
 	-pipenv run pip uninstall --yes rsa_demo
-	pipenv run pip install pyasn1 faker
+	pipenv run pip install pyasn1 faker mypy
 	pipenv run pip install dist/*whl
 	pipenv run keygen -h
 	pipenv run encrypt -h
@@ -109,5 +115,5 @@ wheel:
 Pipfile:
 	@$(PHASE) $@
 	pipenv --python 3.7
-	pipenv install pip faker setuptools pylint pycodestyle pyasn1 random faker
+	pipenv install pip faker setuptools pylint pycodestyle pyasn1 random faker mypy
 	pipenv check

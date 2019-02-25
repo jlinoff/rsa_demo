@@ -2,9 +2,10 @@
 Extended Euclidean algorithms for testing.
 '''
 import random
+from typing import Tuple
 
 
-def decompose(n: int):
+def decompose(n: int) -> Tuple[int, int]:
     '''
     Citation: https://jeremykun.com/2013/06/16/miller-rabin-primality-test/
     Citation: https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
@@ -15,10 +16,10 @@ def decompose(n: int):
         n = n // 2
         exponentOfTwo += 1
 
-        return exponentOfTwo, n
+    return exponentOfTwo, n
 
 
-def isWitness(possibleWitness: int, p: int, exponent: int, remainder: int):
+def isWitness(possibleWitness: int, p: int, exponent: int, remainder: int) -> bool:
     '''
     Citation: https://jeremykun.com/2013/06/16/miller-rabin-primality-test/
     Citation: https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
@@ -34,10 +35,10 @@ def isWitness(possibleWitness: int, p: int, exponent: int, remainder: int):
         if possibleWitness == p - 1:
             return False
 
-        return True
+    return True
 
 
-def is_prime0(p: int, accuracy: int=100):
+def is_prime0(p: int, accuracy: int=100) -> bool:
     '''
     Citation: https://jeremykun.com/2013/06/16/miller-rabin-primality-test/
     Citation: https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
@@ -57,7 +58,7 @@ def is_prime0(p: int, accuracy: int=100):
     return True
 
 
-def is_prime1(n: int, t: int=8):
+def is_prime1(n: int, t: int=8) -> bool:
     """
     Citation: https://rosettacode.org/wiki/Miller%E2%80%93Rabin_primality_test#Python
     Citation: https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test

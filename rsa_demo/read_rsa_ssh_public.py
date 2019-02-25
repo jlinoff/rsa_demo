@@ -14,9 +14,10 @@ The files are of the from:
 import base64
 import struct
 import sys
+from typing import Tuple
 
 
-def read_ssh_rsa_pubkey(path: str) -> [str, int, int]:
+def read_ssh_rsa_pubkey(path: str) -> Tuple[str, int, int]:
     '''
     Read the SSH RSA public key file.
     '''
@@ -37,7 +38,7 @@ def read_ssh_rsa_pubkey(path: str) -> [str, int, int]:
     return str(alg, 'utf-8'), pubexp, modulus
 
 
-def main():
+def main() -> None:
     '''main'''
     for path in sys.argv[1:]:
         print(f'{path}')

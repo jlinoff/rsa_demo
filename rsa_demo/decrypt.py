@@ -19,8 +19,10 @@ import argparse
 import base64
 import math
 import os
+import random
 import struct
 import sys
+from typing import Tuple
 
 try:
     # The right way for 3.8 and beyond.
@@ -174,7 +176,7 @@ def read_pkcs1_prikey(opts: argparse.Namespace) -> namedtuple:
 # pylint: enable=too-many-locals
 
 
-def dump_namedtuple(nto: namedtuple):
+def dump_namedtuple(nto: namedtuple) -> None:
     '''
     Generic method for dumping a named tuple.
     '''
@@ -198,7 +200,7 @@ def dump_namedtuple(nto: namedtuple):
         print(f'   {item:<{maxlen}} : {nbytes:>4}  0x{val:x}')
 
 
-def read_raw_input(opts: argparse.Namespace):
+def read_raw_input(opts: argparse.Namespace) -> bytes:
     '''
     Read the raw ciphertext data.
     It can be either binary or PEM.
@@ -210,7 +212,7 @@ def read_raw_input(opts: argparse.Namespace):
     return bytes(sys.stdin.read(), 'utf-8')
 
 
-def read_input(opts: argparse.Namespace):
+def read_input(opts: argparse.Namespace) -> Tuple[bytes, int, int]:
     '''
     Grab the bytes.
     '''
@@ -239,7 +241,7 @@ def read_input(opts: argparse.Namespace):
     return data[12:], len(data[12:]), padding
 
 
-def decrypt(opts: argparse.Namespace, rsa: namedtuple):
+def decrypt(opts: argparse.Namespace, rsa: namedtuple) -> None:
     '''
     Decrypt the file data.
     '''
@@ -274,7 +276,7 @@ def decrypt(opts: argparse.Namespace, rsa: namedtuple):
         sys.stdout.write(str(plaintext, 'utf-8'))
 
 
-def main():
+def main() -> None:
     '''
     main
     '''

@@ -15,11 +15,13 @@ The files are of the form:
 '''
 import base64
 import sys
+from typing import Tuple
+
 from pyasn1.type import univ
 from pyasn1.codec.der import decoder as der_decoder
 
 
-def read_pem_rsa_pubkey(path: str) -> [int, int]:
+def read_pem_rsa_pubkey(path: str) -> Tuple[int, int]:
     '''
     Read the PEM encoded file.
     '''
@@ -39,7 +41,7 @@ def read_pem_rsa_pubkey(path: str) -> [int, int]:
     return int(modulus), int(pubexp)
 
 
-def main():
+def main() -> None:
     '''main'''
     for path in sys.argv[1:]:
         print(f'{path}')

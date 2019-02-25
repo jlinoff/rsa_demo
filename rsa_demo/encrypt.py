@@ -69,6 +69,7 @@ import random
 import struct
 import sys
 import textwrap
+from typing import Tuple
 
 from pyasn1.type import univ
 from pyasn1.codec.der import decoder as der_decoder
@@ -188,7 +189,7 @@ Show program's version number and exit.
     return opts
 
 
-def read_pem_rsa_pubkey(path: str) -> [int, int]:
+def read_pem_rsa_pubkey(path: str) -> Tuple[int, int]:
     '''
     Read the PEM encoded file.
     '''
@@ -208,7 +209,7 @@ def read_pem_rsa_pubkey(path: str) -> [int, int]:
     return int(modulus), int(pubexp)
 
 
-def read_ssh_rsa_pubkey(path: str) -> [str, int, int]:
+def read_ssh_rsa_pubkey(path: str) -> Tuple[str, int, int]:
     '''
     Read the SSH RSA public key file.
     '''
@@ -229,7 +230,7 @@ def read_ssh_rsa_pubkey(path: str) -> [str, int, int]:
     return str(alg, 'utf-8'), pubexp, modulus
 
 
-def read_public_key_file(opts: argparse.Namespace, path: str) -> [int, int]:
+def read_public_key_file(opts: argparse.Namespace, path: str) -> Tuple[int, int]:
     '''
     Figure out which type of file this is and read it.
     '''
@@ -244,9 +245,10 @@ def read_public_key_file(opts: argparse.Namespace, path: str) -> [int, int]:
         _, pub, mod = read_ssh_rsa_pubkey(path)
         return mod, pub
     err(f'unrecognized file format in {path}.')
+    return -1, -1
 
 
-def read_input(opts: argparse.Namespace) -> bytearray:
+def read_input(opts: argparse.Namespace) -> bytes:
     '''
     Read the input data.
 
@@ -264,7 +266,7 @@ def read_input(opts: argparse.Namespace) -> bytearray:
     return bytes(sys.stdin.read(), 'utf-8')
 
 
-def encrypt(opts: argparse.Namespace, modulus: int, pubexp: int):
+def encrypt(opts: argparse.Namespace, modulus: int, pubexp: int) -> None:
     '''
     Encrypt the input using RSA.
     '''
@@ -272,7 +274,7 @@ def encrypt(opts: argparse.Namespace, modulus: int, pubexp: int):
     plaintext = read_input(opts)
     infov(opts, f'read {len(plaintext)} bytes')
     num_bits = int(math.ceil(math.log(modulus, 2)))
-    bytes_per_block =  num_bits // 8  # based on bits
+    bytes_per_block = num_bits // 8  # based on bits
     infov(opts, f'num_bits: {num_bits}')
     infov(opts, f'bytes/block: {bytes_per_block}')
     assert bytes_per_block < 0xffff  # we only allocate 2 bytes for padding
@@ -284,7 +286,6 @@ def encrypt(opts: argparse.Namespace, modulus: int, pubexp: int):
     infov(opts, f'padding: {padding}')
     assert (len(plaintext) % bytes_per_block) == 0
     ciphertext = bytes([])
-    encrypted = []
     for i in range(0, len(plaintext), bytes_per_block):
         end = i + bytes_per_block
         block = plaintext[i:end]
@@ -316,13 +317,14 @@ def encrypt(opts: argparse.Namespace, modulus: int, pubexp: int):
     # At this point the data is encrypted.
     # If the user did not specify binary output, output in base64.
     if opts.binary:
-        enc = ciphertext
+        encb = ciphertext
+        encs = str(ciphertext)
         mode = 'wb'
     else:
         b64 = base64.b64encode(ciphertext)
         data_str = str(b64, 'utf-8').rstrip()
         data_str = '\n'.join(textwrap.wrap(data_str, 64))
-        enc = f'''\
+        encs = f'''\
 -----BEGIN JOES RSA ENCRYPTED DATA-----
 {data_str}
 -----END JOES RSA ENCRYPTED DATA-----
@@ -333,13 +335,16 @@ def encrypt(opts: argparse.Namespace, modulus: int, pubexp: int):
     if opts.output:
         infov(opts, f'writing to {opts.output}')
         with open(opts.output, mode) as ofp:
-            ofp.write(enc)
+            if opts.binary:
+                ofp.write(encb)
+            else:
+                ofp.write(encs)
     else:
         infov(opts, 'writing to stdout')
-        sys.stdout.write(enc)
+        sys.stdout.write(encs)
 
 
-def main():
+def main() -> None:
     '''
     main
     '''
