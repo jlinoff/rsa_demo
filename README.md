@@ -89,6 +89,10 @@ The header consists of the following fields.
 | version | 8..9     | The version number in big-endian format. |
 | padding | 10..11   | The number of padding bytes in big-endian format. This is the number of dummy bytes present at the end of the last block to fill it out. |
 
+### Test Data
+There is a program called `gendata` that generates dummy test data using the `faker` package.
+It was used to generate the test data.
+
 ### A Simple Example
 Here is a simple example of how to use it:
 
@@ -171,7 +175,7 @@ private key is used to decrypt that same message.
 At this point Alice and Bob have communicated back forth. The messages are secure from observers that can only observe their communications. Unfortunately this does not mean that the messages are secure.
 
 ### Vulnerabilities
-Here are some of the tactics an attacker could employ to access their communications.
+Here are some of the tactics an attacker could employ to access communications between Alice and Bob.
 
 1. System hack: an attacker could access their computer systems and take their private key files. That would allow the attacker to decrypt all messages.
 2. MITM (man-in-the-middle) attach: An attacker could sit in the middle of the communications between Alice and Bob and spoof them. That means that when Alice talks to Bob, the attacker intercepts the communications from Alice and substitutes their (the attackers) public key in the message to Bob. When Bob responds he is using the attackers public key file to encrypt messages for Alice. When he sends the encrypted message back to Alice, the attacker intercepts it, decodes the message using their (the attackers private key), re-encrypts using Alice's original public key and then sends it to Alice. Thus, Alice and Bob see the same communication pattern as before _but their communications have been compromised_. And vice-versa for the reverse direction.
@@ -179,7 +183,7 @@ Here are some of the tactics an attacker could employ to access their communicat
 4. Algorithm compromise - An attacker figures out a vulnerability in one or more of the underlying algorithms. This is the main reason that you should never use tools and libraries (like the ones in this demo) for secure communications. You want battle tested tools that are under constant scrutiny by experts to detect and fix vulnerabilities.
 
 ### Mitigation
-Here are some of the mitigation tactics.
+Here are some of the mitigation tactics for the vulnerabilities in the previous section.
 
 1. The probability of system hacks can be reduced by good security hygiene.
 2. The probability of MITM attacks can be reduced by using certificates.
@@ -195,7 +199,7 @@ The keys generated are equivalent to running the following command.
 $ ssh-keygen -t rsa -b 2048 -f test1 -N '' -m PEM -q
 ```
 
-This command is not secure. Do not use it for production keys. One
+This above command is not secure. Do not use it for production keys. One
 should always use a non-empty passphrase.
 
 I hope that this helps you understand how RSA works.
