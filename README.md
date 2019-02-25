@@ -101,7 +101,7 @@ Here is a simple example of how to use it:
    $ # file will not be generated.
    $ #   ssh-keygen -t rsa -b 2048 -f dummykeys -N '' -m PEM -q
    $ time pipenv run keygen -o dummykeys -v
-   $ ls -1
+   $ ls -1 dummykeys*
    dummykeys
    dummykeys.pub
    dummykeys.pub.pem
