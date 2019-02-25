@@ -54,8 +54,9 @@ parts to make decryption easier by allowing invalid formats to
 be recognized quickly:
 
    id              : [0-7] 8 bytes - "joes-rsa"
-   version         : [8-9] 2 bytes (0)
-   ciphertext      : [10:] bytes of encrypted data
+   version         : [8-9] 2 bytes (0), big-endian
+   padding         : [10-11] 2 bytes, size of padding big-endian
+   ciphertext      : [12:] bytes of encrypted data
 
 This is, obviously, not a standard format but it it simple enough
 to use for pedagological purposes.

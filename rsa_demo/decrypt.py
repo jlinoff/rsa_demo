@@ -11,8 +11,9 @@ The first 15 bytes of both are a header that fully describe
 the ciphertext data. That header looks like this:
 
    id              : [0-7] 8 bytes - "joes-rsa"
-   version         : [8-9] 2 bytes (0)
-   ciphertext      : [10:] bytes of encrypted data
+   version         : [8-9] 2 bytes (0), big-endian
+   padding         : [10-11] 2 bytes, size of padding big-endian
+   ciphertext      : [12:] bytes of encrypted data
 '''
 import argparse
 import base64

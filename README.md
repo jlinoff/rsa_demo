@@ -76,9 +76,9 @@ The header consists of the following fields.
 
 | Field   | Position | Description |
 | ------- | -------: | ----------- |
-| id      | 0..9     | The bytes "joes-rsa". |
-| version | 10.11    | The version number in big-endian format. |
-| padding | 12..13   | The number of padding bytes in big-endian format. This is the number of dummy bytes present at the end of the last block to fill it out. |
+| id      | 0..7     | The bytes "joes-rsa". |
+| version | 8..9     | The version number in big-endian format. |
+| padding | 10..11   | The number of padding bytes in big-endian format. This is the number of dummy bytes present at the end of the last block to fill it out. |
 
 ### A Simple Example
 Here is a simple example of how to use it:
