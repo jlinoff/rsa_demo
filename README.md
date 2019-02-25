@@ -22,7 +22,8 @@ released in a local `pipenv` environment.
 
 The theory behind RSA including descriptions of Fermats Little Theorem,
 the Extendend Euclidean Algorithm, Bezout's Identity, modulus arithmetic,
-factoring complexity and the host of other concepts and history related
+factoring complexity, prime numbers (and their relation to the Riemann Hypothesis - 
+a personal favorite) and the host of other concepts and history related
 to the RSA algorithm are not discussed here because there are so many
 great resources on the web. My hope is that you will find and read
 the references and then compare them to the implementations here.
