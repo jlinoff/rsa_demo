@@ -27,7 +27,7 @@ factoring complexity, prime numbers (and their relation to the Riemann Hypothesi
 a personal favorite) and the host of other concepts and history related
 to the RSA algorithm are not discussed here because there are so many
 great resources on the web. My hope is that you will find and read
-the references and then compare them to the implementations here.
+those references and then compare them to the implementations here.
 
 ### Important Disclaimer
 The goal is purely pedagogical. Do not try to use it for any
