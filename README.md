@@ -14,7 +14,7 @@ key files.
 
 One interesting feature is that it will encrypt and decrypt text of
 sizes greater than a single block. Another is that it uses the same
-key structure as production versions.
+key structure as production tools (PKCS#1 and ssh-rsa).
 
 The code is written in python3 (compatible with 3.7 or later). It exists
 in a local module named `rsa_demo` that is bundled as a wheel that is
