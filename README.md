@@ -18,7 +18,8 @@ key structure as production tools (PKCS#1 and ssh-rsa).
 
 The code is written in python3 (compatible with 3.7 or later). It exists
 in a local module named `rsa_demo` that is bundled as a wheel that is
-released in a local `pipenv` environment.
+released in a local `pipenv` environment. It has very simple `mypy`
+stubs for the `pyasn1` and 'faker' packages.
 
 The theory behind RSA including descriptions of Fermats Little Theorem,
 the Extendend Euclidean Algorithm, Bezout's Identity, modulus arithmetic,
