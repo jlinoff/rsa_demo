@@ -22,7 +22,7 @@ released in a local `pipenv` environment. It has very simple `mypy`
 stubs for the `pyasn1` and `faker` packages.
 
 The theory behind RSA including descriptions of Fermats Little Theorem,
-the Extendend Euclidean Algorithm, Bezout's Identity, modulus arithmetic,
+the Extended Euclidean Algorithm, Bezout's Identity, modulus arithmetic,
 factoring complexity, prime numbers (and their relation to the Riemann Hypothesis - 
 a personal favorite) and the host of other concepts and history related
 to the RSA algorithm are not discussed here because there are so many
